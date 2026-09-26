@@ -724,6 +724,13 @@
   const letterBody     = document.getElementById('letterBody');
   const replayBtn      = document.getElementById('replayBtn');
 
+  // ============ BACKGROUND SONG ============
+  // Replace this URL with your own direct .mp3/.ogg song URL.
+  const songUrl = 'Olivia Rodrigo - u me (Lyric Video) (mp3cut.net).mp3';
+  const backgroundSong = new Audio(songUrl);
+  backgroundSong.loop = true;
+  backgroundSong.volume = 0.35;
+
   // ============ LETTER CONTENT (kept as data, easy to edit) ============
   const letterParagraphs = [
     "Yohoo, dito ang tingin! Pero pwede rin sa pinakamalasang ea ng Spain!",
@@ -804,6 +811,10 @@
   function openEnvelope(){
     if(opening) return; // guard against double-clicks mid-animation
     opening = true;
+
+    // Start the song when the user opens the birthday letter.
+    // Browsers usually block autoplay, so starting from this click is intentional.
+    backgroundSong.play().catch(() => {});
 
     // step 1: envelope "flies" and settles front-and-center
     envelope.classList.add('flying');
